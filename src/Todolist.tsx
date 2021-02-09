@@ -27,7 +27,7 @@ function Todolist(props: TodolistPropsType) {
 
     const addTask = () => {
         if (title.trim() !== "") {
-            props.addTask(title.trim())
+            props.addTask(title.trim(), props.id)
             setTitle("")
         } else {
             setError("Title is required");
@@ -71,10 +71,10 @@ function Todolist(props: TodolistPropsType) {
                     {
                         props.tasks.map(t => {
                                 const onClickRemoveTask = () => {
-                                    props.removeTask(t.id)
+                                    props.removeTask(t.id, props.id)
                                 }
                                 const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                                    props.changeTaskStatus(t.id, e.currentTarget.checked)
+                                    props.changeTaskStatus(t.id, e.currentTarget.checked, props.id)
                                 };
 
                                 return <li className={t.isDone ? "is-done" : ""  }><input  type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
