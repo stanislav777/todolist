@@ -5,7 +5,21 @@ import {v1} from "uuid";
 
 export type FilterValuesType = "all" | "active" | "completed"
 
+type TodoListType = {
+    id: string
+    title: string
+    filter: FilterValuesType
+
+}
+
 function App() {
+    // BLL
+    const todolistID1 = v1();
+    const todolistID2 = v1();
+     const [todolist, setTodolist] = useState<Array<TodoListType>>([
+         {id: todolistID1, title:'What to learn', filter: "all"},
+         {id: todolistID2, title:'What to buy', filter: "all"}
+     ])
 
     let [tasks, setTasks] = useState([
         {id: v1(), title: "87564678675", isDone: true},
