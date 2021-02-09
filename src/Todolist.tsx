@@ -11,11 +11,12 @@ type  TaskPropsType = {
 type TodolistPropsType = {
     title: string
     tasks: Array<TaskPropsType>
-    removeTask: (id: string) => void
-    changeFilter: (value: FilterValuesType) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    removeTask: (id: string, todolistID: string) => void
+    changeFilter: (value: FilterValuesType,todolistID: string) => void
+    addTask: (title: string,todolistID: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, todolistID: string) => void
     filter: FilterValuesType
+    todolistID: string
 }
 
 function Todolist(props: TodolistPropsType) {
