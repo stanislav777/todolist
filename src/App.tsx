@@ -80,12 +80,14 @@ function App() {
     }
 
     function changeStatus( taskId: string, isDone: boolean,todolistID: string) {
-       let task = tasks.find(t =>t.id === taskId);
+        const todoListTasks = tasks[todolistID]
+
+
+       const task: TaskPropsType| undefined = todoListTasks.find(t =>t.id === taskId);
        if(task) {
            task.isDone = isDone;
        }
-       let copy =[...tasks]
-       setTasks(copy);
+      setTasks({...tasks});
     }
 
     let [filter, setFilter] = useState<"all" | "active" | "completed">("all")
