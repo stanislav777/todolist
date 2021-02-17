@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValuesType} from "./App";
+import AddItemForm from "./AddItemForm";
 
 
 type  TaskPropsType = {
@@ -17,31 +18,15 @@ type TodolistPropsType = {
     addTask: (title: string,todolistID: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean, todolistID: string) => void
     filter: FilterValuesType
-
+    removeTodoList: (todolistID: string) =>void
 }
 
 function Todolist(props: TodolistPropsType) {
 
-    let [title, setTitle] = useState("")
-    let [error, setError] = useState<string | null>(null)
+   const addTask = (title:string) => {
+       props.addTask(title, props.id)
+   }
 
-    const addTask = () => {
-        if (title.trim() !== "") {
-            props.addTask(title.trim(), props.id)
-            setTitle("")
-        } else {
-            setError("Title is required");
-        }
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
-        if (e.charCode === 13) {
-            addTask()
-        }
-    }
     const All = () => {
         props.changeFilter("all", props.id)
     }
@@ -56,16 +41,9 @@ function Todolist(props: TodolistPropsType) {
     return (
         <div className="App">
             <div>
-                <h3>{props.title}</h3>
-                <div>
-                    <input value={title}
-                           onChange={onChangeHandler}
-                           onKeyPress={onKeyPressHandler}
-                           className={error ? "error" : ""}
-                    />
-                    <button onClick={addTask}>+</button>
-                    {error && <div className="error-message">{error}</div>}
-                </div>
+                <h3>{props.title} <button onClick={()=> props.removeTodoList(props.id)}>X</button></h3>
+
+              <AddItemForm addItem={addTask}/>
 
                 <ul>
                     {
@@ -79,8 +57,7 @@ function Todolist(props: TodolistPropsType) {
 
                                 return <li className={t.isDone ? "is-done" : ""  }><input  type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
                                     <span>{t.title} </span>
-                                    <button onClick={onClickRemoveTask}> х
-                                    </button>
+                                    <button onClick={onClickRemoveTask}> х </button>
                                 </li>
                             }
                         )
