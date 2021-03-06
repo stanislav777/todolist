@@ -20,13 +20,13 @@ export  type TodoListType = {
     filter: FilterValuesType
 }
 
-export type  TaskStateType = {
+export type  TasksStateType = {
     [key: string]: Array<TaskPropsType>
 }
 
 function App() {
     // BLL
-    const toDoListID1 = v1(); //иваров-рвипыор-иыио-232ирчоы-ироыв
+    const toDoListID1 = v1();
     const toDoListID2 = v1();
 
     const [todoLists, setTodolist] = useState<Array<TodoListType>>([
@@ -35,7 +35,7 @@ function App() {
     ])
 
 
-    const [tasks, setTasks] = useState<TaskStateType>({
+    const [tasks, setTasks] = useState<TasksStateType>({
         [toDoListID1]: [
             {id: v1(), title: '87564678675', isDone: true},
             {id: v1(), title: 'JS', isDone: false},
@@ -111,7 +111,6 @@ function App() {
 
     function changeStatus(taskId: string, isDone: boolean, todolistID: string) {
         const todoListTasks = tasks[todolistID]
-
 
         const task: TaskPropsType | undefined = todoListTasks.find(t => t.id === taskId);
         if (task) {
