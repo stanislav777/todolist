@@ -65,7 +65,10 @@ export const tasksReducer = (state = initialState, action: ActionType) => {
 
             let todoListTasks = state[action.todolistId]
 
-            const newTodoListTasks = todoListTasks.map(task => task.id === action.taskId ? {...task, isDone: action.isDone} : task );
+            const newTodoListTasks = todoListTasks.map(task => task.id === action.taskId ? {
+                ...task,
+                isDone: action.isDone
+            } : task);
 
             state[action.todolistId] = [...newTodoListTasks]
             return ({...state});
@@ -75,11 +78,12 @@ export const tasksReducer = (state = initialState, action: ActionType) => {
 
             let todoListTasks = state[action.todolistId]
 
-            const task = todoListTasks.find(task => task.id === action.taskId);
-            if (task) {
-                task.title = action.title;
-            }
-            state[action.todolistId] = [...todoListTasks]
+            const newTodoListTasks = todoListTasks.map(task => task.id === action.taskId ? {
+                ...task,
+                title: action.title
+            } : task);
+
+            state[action.todolistId] = [...newTodoListTasks]
             return ({...state});
         }
 
