@@ -1,8 +1,8 @@
-import React, {ChangeEvent, useCallback} from 'react';
+import React, {ChangeEvent} from 'react';
 import {Checkbox, IconButton} from '@material-ui/core';
 import EditableSpan from './EditableSpan';
 import {Delete} from '@material-ui/icons';
-import { TaskPropsType } from './Todolist';
+import {TaskPropsType} from './Todolist';
 
 export type TaskPropType = {
     task: TaskPropsType
